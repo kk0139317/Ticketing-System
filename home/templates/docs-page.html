@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block body %}
+
+<div class="docs-content">
+	<div class="container">
+				{% for i in data %}
+			    <article class="docs-article" id="{{i.doc_id}}">
+				    <header class="docs-header">
+					    <h1 class="docs-heading">{{i.title}} <span class="docs-time">Written by: {{i.created_by}}</span></h1>
+					    <section class="docs-intro">
+						    <p>{{i.description}}</p>
+						</section><!--//docs-intro-->
+						
+						
+						
+					     <h5>Code:</h5>
+						<div class="docs-code-block" style="text-align: left;">
+							<pre class="shadow-lg rounded" style="text-align: left;">
+								<code class="json hljs" style="text-align: left;"><br>{{i.code}} <br> </code>
+						</pre>
+						</div><!--//docs-code-block-->
+					</header>
+				</article>
+				{% endfor %}
+			</div>
+		</div>
+						
+
+	</div>
+					{% endblock body %}

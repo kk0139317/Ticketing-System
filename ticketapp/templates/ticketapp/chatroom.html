@@ -1,0 +1,55 @@
+{% extends 'ticketapp/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/admin/chat.css' %}">
+
+<section class="msger" style="width: 100%;">
+  <header class="msger-header">
+    <div class="msger-header-title">
+      <i class="fas fa-comment-alt"></i>
+      <ul style="display: flex;">
+        {% for i in users %}
+        <a href="/adminpannel/chatpage/{{i.email}}" style="decoration:none">
+        <div class="userbox">
+          <li style="margin-left: 20px;">{{i.username}}</li>
+        </div>
+      </a>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="msger-header-options">
+      <span><i class="fas fa-cog"></i></span>
+    </div>
+  </header>
+
+  <main class="msger-chat">
+    {% for val in chatval %}
+    <div class="msg left-msg">
+      <div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"></div>
+
+      <div class="msg-bubble">
+        <div class="msg-info">
+          <div class="msg-info-name">{{val.sender}}</div>
+          <div class="msg-info-time">{{val.recever}}</div>
+        </div>
+
+        <div class="msg-text">
+          {{val.chat}}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    
+  </main>
+
+  <form class="msger-inputarea" action="{{recever}}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="chat" class="msger-input" placeholder="Enter your message...">
+    <button type="submit" class="msger-send-btn">Send</button>
+  </form>
+</section>
+
+
+{% comment %} <script src="{% static 'js/chat.js' %}"></script> {% endcomment %}
+
+{% endblock content %}
